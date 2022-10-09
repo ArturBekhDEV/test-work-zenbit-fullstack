@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import styled, { createGlobalStyle, css } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import ApercuFont from "./fonts/ApercuArabicPro-Regular.woff2";
 import EarthImage from "../src/assets/mask_map.png";
-import redItemBot from "../src/assets/red_item_mid_map.png";
+import Footer from "./Footer";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -24,7 +24,6 @@ body {
   background: #ffff;
   color: #3E3E3E;
   height: 100%;
-
 }
 `;
 
@@ -99,6 +98,7 @@ function App() {
           <img src={EarthImage} alt="map"></img>
         </StyledMap>
       </StyledFormWrapper>
+      <Footer />
     </>
   );
 }
