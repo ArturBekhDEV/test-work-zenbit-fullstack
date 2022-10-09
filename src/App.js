@@ -3,7 +3,11 @@ import styled, { createGlobalStyle } from "styled-components";
 import ApercuFont from "./fonts/ApercuArabicPro-Regular.woff2";
 import EarthImage from "../src/assets/mask_map.png";
 import Footer from "./Footer";
+import yellowTop from "../src/assets/yellow_item_top.png";
+import yellowMid from "../src/assets/yellow_item_mid_map.png";
+import redMid from "../src/assets/red_item_mid_map.png";
 
+// STYLING //
 const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Apercu Arabic Pro';
@@ -26,7 +30,6 @@ body {
   height: 100%;
 }
 `;
-
 const StyledFormWrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -35,12 +38,23 @@ const StyledFormWrapper = styled.div`
   position: relative;
 `;
 const StyledForm = styled.form`
+  position: relative;
   width: 100%;
   width: 557px;
   margin-left: 100px;
   margin-right: 30px;
   background-color: #fff;
   box-sizing: border-box;
+
+  .yellow_top_icon {
+    position: absolute;
+    top: -170px;
+    left: -85px;
+  }
+  @media (max-width: 973px) {
+    margin: 0 auto;
+    padding: 30px;
+  }
 `;
 const StyledInput = styled.input`
   display: block;
@@ -49,6 +63,13 @@ const StyledInput = styled.input`
   border: 1px solid #dcdcdc;
   border-radius: 10px;
   margin-bottom: 8px;
+
+  ::placeholder {
+    color: #2d2d2d;
+    font-weight: 400;
+    font-size: 18px;
+    padding-left: 48px;
+  }
 `;
 const StyledTextArea = styled.textarea`
   display: block;
@@ -57,6 +78,13 @@ const StyledTextArea = styled.textarea`
   border: 1px solid #dcdcdc;
   border-radius: 10px;
   margin-bottom: 8px;
+
+  ::placeholder {
+    color: #2d2d2d;
+    font-weight: 400;
+    font-size: 18px;
+    padding: 31px 0px 0px 48px;
+  }
 `;
 const StyledButton = styled.button`
   display: block;
@@ -70,10 +98,23 @@ const StyledButton = styled.button`
   line-height: 18px;
   cursor: pointer;
 `;
-const StyledMap = styled.div``;
-const StyledError = styled.div`
-  color: red;
-  font-weight: 700;
+const StyledMap = styled.div`
+  position: relative;
+
+  .yellow_mid_icon {
+    position: absolute;
+    top: 525px;
+    left: -35px;
+    z-index: 1;
+  }
+  .red_mid_icon {
+    position: absolute;
+    top: 555px;
+    left: -50px;
+  }
+  @media (max-width: 973px) {
+    display: none;
+  }
 `;
 
 function App() {
@@ -82,20 +123,20 @@ function App() {
       <GlobalStyle />
       <StyledFormWrapper>
         <StyledForm>
+          <img className="yellow_top_icon" src={yellowTop} alt="" />
           <h1>Reach Out to Us</h1>
           <label htmlFor="name"></label>
-          <StyledInput type="text" name="name" />
+          <StyledInput type="text" placeholder="Your name*" name="name" />
           <label htmlFor="email"></label>
-          <StyledInput type="email" name="email" />
+          <StyledInput type="email" placeholder="Your e-mail*" name="email" />
           <label htmlFor="message"></label>
-          <StyledTextArea name="message" />
-          <StyledError>
-            <p>Something going wrong, try again.</p>
-          </StyledError>
+          <StyledTextArea name="message" placeholder="Your Message*" />
           <StyledButton type="submit">Send Message</StyledButton>
         </StyledForm>
         <StyledMap>
           <img src={EarthImage} alt="map"></img>
+          <img className="yellow_mid_icon" src={yellowMid} alt="" />
+          <img className="red_mid_icon" src={redMid} alt="" />
         </StyledMap>
       </StyledFormWrapper>
       <Footer />

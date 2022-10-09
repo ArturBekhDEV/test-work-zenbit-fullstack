@@ -7,15 +7,18 @@ import iconLinks from "../src/assets/icons_links.png";
 
 const StyledFooterWrapper = styled.div`
   position: relative;
+  bottom: 0px;
   background-color: #fafafa;
   border-top: 1px solid #d8d8d8;
-  height: 200px;
+  height: 200px !important;
   display: flex;
+  width: auto;
   justify-content: space-between;
   align-items: center;
 
   .icon_links {
     padding-left: 320px;
+    cursor: pointer;
   }
   .red_icon {
     position: absolute;
@@ -25,6 +28,23 @@ const StyledFooterWrapper = styled.div`
     position: absolute;
     bottom: 101px;
     right: 127px;
+  }
+
+  @media (max-width: 655px) {
+    justify-content: center;
+    align-items: center;
+    .green_icon {
+      right: 30px;
+    }
+    .yellow_icon {
+      display: none;
+    }
+    .red_icon {
+      display: none;
+    }
+    .icon_links {
+      padding: 0;
+    }
   }
 `;
 
