@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import ApercuFont from "./fonts/ApercuArabicPro-Regular.woff2";
 import EarthImage from "../src/assets/mask_map.png";
@@ -6,8 +6,12 @@ import Footer from "./Footer";
 import yellowTop from "../src/assets/yellow_item_top.png";
 import yellowMid from "../src/assets/yellow_item_mid_map.png";
 import redMid from "../src/assets/red_item_mid_map.png";
+import { useDispatch, useSelector } from "react-redux";
+import { setEmail, setMessage, setName } from "./redux/slices/dataSlice";
+import { dataSliceReducer } from "./redux/slices/dataSlice";
 
 // STYLING //
+
 const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Apercu Arabic Pro';
@@ -118,6 +122,16 @@ const StyledMap = styled.div`
 `;
 
 function App() {
+  const dispatch = useDispatch();
+  const nameState = useSelector((state) => state.dataFilter.name);
+  const emailState = useSelector((state) => state.dataFilter.email);
+  const messageState = useSelector((state) => state.dataFilter.message);
+  const allState = useSelector((state) => state.dataFilter);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(allState);
+  };
   return (
     <>
       <GlobalStyle />
@@ -126,12 +140,31 @@ function App() {
           <img className="yellow_top_icon" src={yellowTop} alt="" />
           <h1>Reach Out to Us</h1>
           <label htmlFor="name"></label>
-          <StyledInput type="text" placeholder="Your name*" name="name" />
+          <StyledInput
+            onChange={(e) => dispatch(setName(e.target.value))}
+            value={nameState}
+            type="text"
+            placeholder="Your name*"
+            name="name"
+          />
           <label htmlFor="email"></label>
-          <StyledInput type="email" placeholder="Your e-mail*" name="email" />
+          <StyledInput
+            onChange={(e) => dispatch(setEmail(e.target.value))}
+            value={emailState}
+            type="email"
+            placeholder="Your e-mail*"
+            name="email"
+          />
           <label htmlFor="message"></label>
-          <StyledTextArea name="message" placeholder="Your Message*" />
-          <StyledButton type="submit">Send Message</StyledButton>
+          <StyledTextArea
+            onChange={(e) => dispatch(setMessage(e.target.value))}
+            value={messageState}
+            name="message"
+            placeholder="Your Message*"
+          />
+          <StyledButton onClick={handleSubmit} type="submit">
+            Send Message
+          </StyledButton>
         </StyledForm>
         <StyledMap>
           <img src={EarthImage} alt="map"></img>
