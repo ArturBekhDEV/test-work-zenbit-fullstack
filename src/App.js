@@ -67,6 +67,8 @@ const StyledInput = styled.input`
   border: 1px solid #dcdcdc;
   border-radius: 10px;
   margin-bottom: 8px;
+  font-size: 24px;
+  padding-left: 20px;
 
   ::placeholder {
     color: #2d2d2d;
@@ -82,6 +84,10 @@ const StyledTextArea = styled.textarea`
   border: 1px solid #dcdcdc;
   border-radius: 10px;
   margin-bottom: 8px;
+  font-size: 24px;
+  padding-left: 20px;
+  padding-top: 20px;
+  font-family: "Apercu Arabic Pro", sans-serif;
 
   ::placeholder {
     color: #2d2d2d;
@@ -101,6 +107,11 @@ const StyledButton = styled.button`
   font-size: 18px;
   line-height: 18px;
   cursor: pointer;
+
+  :hover {
+    background-color: red;
+    transition: all 0.5s;
+  }
 `;
 const StyledMap = styled.div`
   position: relative;
@@ -130,7 +141,9 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(allState);
+    if (nameState === "" || emailState === "" || messageState === "") {
+      alert("You need to fill all form!");
+    }
   };
   return (
     <>
