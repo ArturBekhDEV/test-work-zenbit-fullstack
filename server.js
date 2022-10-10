@@ -16,17 +16,33 @@ const db = mysql.createPool({
   database: "form_contact",
 });
 
-const PORT = 5000;
-
-app.get("/", (req, res) => {
-  const sqlInsert =
-    "INSERT INTO contact_db (name, surname, email) VALUES ('artur', 'bekh', 'artbekh@gmail.com')";
-
-  db.query(sqlInsert, (err, result) => {
-    res.send("hello its test new");
-    console.log("error", err);
-    console.log("result", result);
+app.get("/api/get", (req, res) => {
+  const sqlGet = "SELECT * FROM contact_db";
+  db.query(sqlGet, (error, result) => {
+    res.send(result);
   });
 });
 
+app.post("/api/post", (req, res) => {
+  const { nameState, messageState, emailState } = req.body;
+  const sqlInsert =
+    "INSERT INTO contact_db (name, surname, email) VALUES (?,?,?)";
+  db.query(
+    sqlInsert,
+    [nameState, messageState, emailState],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("result", result);
+      }
+    }
+  );
+});
+
+app.get("/", (req, res) => {
+  console.log("connected");
+});
+
+const PORT = 5000;
 app.listen(PORT, () => console.log("server started!"));

@@ -20,9 +20,12 @@ export const dataSliceReducer = createSlice({
     },
     setClear: (state) => {
       state.name = "";
+      state.email = "";
+      state.message = "";
     },
   },
 });
 
-export const { setName, setEmail, setMessage } = dataSliceReducer.actions;
+export const { setName, setEmail, setMessage, setClear } =
+  dataSliceReducer.actions;
 export default dataSliceReducer.reducer;

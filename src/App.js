@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import ApercuFont from "./fonts/ApercuArabicPro-Regular.woff2";
 import EarthImage from "../src/assets/mask_map.png";
@@ -7,9 +7,13 @@ import yellowTop from "../src/assets/yellow_item_top.png";
 import yellowMid from "../src/assets/yellow_item_mid_map.png";
 import redMid from "../src/assets/red_item_mid_map.png";
 import { useDispatch, useSelector } from "react-redux";
-import { setEmail, setMessage, setName } from "./redux/slices/dataSlice";
-import { dataSliceReducer } from "./redux/slices/dataSlice";
-
+import {
+  setEmail,
+  setMessage,
+  setName,
+  setClear,
+} from "./redux/slices/dataSlice";
+import axios from "axios";
 // STYLING //
 
 const GlobalStyle = createGlobalStyle`
@@ -137,13 +141,24 @@ function App() {
   const nameState = useSelector((state) => state.dataFilter.name);
   const emailState = useSelector((state) => state.dataFilter.email);
   const messageState = useSelector((state) => state.dataFilter.message);
-  const allState = useSelector((state) => state.dataFilter);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (nameState === "" || emailState === "" || messageState === "") {
       alert("You need to fill all form!");
+    } else {
+      axios
+        .post("http://localhost:5000/api/post", {
+          nameState,
+          emailState,
+          messageState,
+        })
+        .then(() => {
+          alert("Succeded added to database!");
+        })
+        .catch((err) => console.log(err));
     }
+    dispatch(setClear(""));
   };
   return (
     <>
